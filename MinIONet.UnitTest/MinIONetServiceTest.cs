@@ -18,7 +18,7 @@ namespace MinIONet.UnitTest
         {           
             requestDto= new MinIONetServiceRequest()
             {
-                EndPoint = "localhost:9000",
+                EndPoint = "localhost:900",
                 AccessKey = "minioadmin",
                 SecretKey= "minioadmin"
             };
@@ -27,7 +27,7 @@ namespace MinIONet.UnitTest
         }     
 
 
-        [Test]
+        [Test]        
         //[MethodName]_[Scenario]_[ExpectedResult]
         public async Task UploadFile_SuccessfullyUpload_ReturnSuccess()
         {
