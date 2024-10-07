@@ -24,27 +24,28 @@ namespace MinIONet.Service.Services
         {
             //Validate MinIO Client Args
             var response=validatorService.ValidateMinIOClientArgs(serviceRequest);
+            if (!response.MessageCode.Equals(nameof(StatusCode.Success))) goto Result;
 
-            //Initialized MinIO client
-            if (response.MessageCode.Equals(nameof(StatusCode.Success))  && minioClient is null)                
-                minioClient = new MinioClient()
-                             .WithEndpoint(serviceRequest.EndPoint)
-                             .WithCredentials(serviceRequest.AccessKey, serviceRequest.SecretKey)
-                             .WithSSL(serviceRequest.IsAcceptHttps)
-                             .Build();
+            //Initialized MinIO client                         
+            minioClient = new MinioClient()
+                            .WithEndpoint(serviceRequest.EndPoint)
+                            .WithCredentials(serviceRequest.AccessKey, serviceRequest.SecretKey)
+                            .WithSSL(serviceRequest.IsAcceptHttps)
+                            .Build();
 
-            //Check MinIO Connection
-            if (response.MessageCode.Equals(nameof(StatusCode.Success)))
-                response = await validatorService.CheckMinIOConnection(minioClient);
-
-            //Check Bucket Exist or Not
-            if (response.MessageCode.Equals(nameof(StatusCode.Success)))
-                response=await validatorService.CheckBucketExist(minioClient,serviceRequest.BucketName);
+            //Check MinIO Connection            
+            response = await validatorService.CheckMinIOConnection(minioClient);
+            if (!response.MessageCode.Equals(nameof(StatusCode.Success))) goto Result;
+       
+            //Check Bucket Exist or Not            
+            response =await validatorService.CheckBucketExist(minioClient,serviceRequest.BucketName);
+            if (!response.MessageCode.Equals(nameof(StatusCode.Success))) goto Result;
 
             //Validate Request
-            if (response.MessageCode.Equals(nameof(StatusCode.Success)) && funReqValidation is not null)
-                response = funReqValidation();
-                
+            if (funReqValidation is not null)
+                response = funReqValidation();           
+
+            Result:
             return (response.MessageCode,response.Message);
         }
         public async Task<MinIONetServiceResponse<string>> UploadFile(UploadRequestArgs uploadReqArgs)
@@ -70,18 +71,24 @@ namespace MinIONet.Service.Services
 
                 //Upload File to Bucket
                 if (String.IsNullOrEmpty(uploadReqArgs.ToFilePath))
+                {
                     await minioClient.PutObjectAsync(new PutObjectArgs()
                     .WithBucket(serviceRequest.BucketName)
                     .WithObject(uploadReqArgs.FileName)
                     .WithContentType(uploadReqArgs.FileType)
                     .WithFileName(uploadReqArgs.FromFilePath));//is reading from local file path
+                    response.Result = uploadReqArgs.FileName;
+                }
                 else
+                {
                     await minioClient.PutObjectAsync(new PutObjectArgs()
                     .WithBucket(serviceRequest.BucketName)
                     .WithObject($"{uploadReqArgs.ToFilePath}/{uploadReqArgs.FileName}")
                     .WithContentType(uploadReqArgs.FileType)
                     .WithFileName(uploadReqArgs.FromFilePath));
-                response.Message = "File Successfully Uploaded";
+                    response.Result = $"{uploadReqArgs.ToFilePath}/{uploadReqArgs.FileName}";
+                }
+                response.Message = "File Successfully Uploaded";               
             }
             catch (BucketNotFoundException ex)
             {

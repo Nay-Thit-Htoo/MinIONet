@@ -9,8 +9,9 @@
 	<Title>MinIO + .Net</Title>
 	<PackageId>MinIO.NET</PackageId>
 	<Version>1.0.2</Version>
-	<Authors>Nay Thit Htoo</Authors>
+	<Authors>Nay Thit Htoo</Authors>	
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<RepositoryUrl>https://github.com/Nay-Thit-Htoo/MinIONet</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
