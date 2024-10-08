@@ -71,24 +71,24 @@ namespace MinIONet.Service.Services
                     goto Result;
 
 
-                string fileName= (String.IsNullOrEmpty(uploadReqArgs.ToFilePath)) ? $"{uploadReqArgs.ToFilePath}/{uploadReqArgs.FileName}" : uploadReqArgs.FileName;
+                string fileName= (!String.IsNullOrEmpty(uploadReqArgs.ToFilePath)) ? $"{uploadReqArgs.ToFilePath}/{uploadReqArgs.FileName}" : uploadReqArgs.FileName;
                 //Upload File to Bucket
                 await minioClient.PutObjectAsync(new PutObjectArgs()
                     .WithBucket(serviceRequest.BucketName)
                     .WithObject(fileName)
                     .WithContentType(uploadReqArgs.FileType)
                     .WithFileName(uploadReqArgs.FromFilePath));//is reading from local file path
-                response.Result = uploadReqArgs.FileName;
+                response.Result = fileName;
                 response.Message = "File Successfully Uploaded";
             }
             catch (BucketNotFoundException ex)
             {
-                response.MessageCode = nameof(StatusCode.Error);
+                response.MessageCode = nameof(StatusCode.NotFound);
                 response.Message = "Bucket Not Found !";
             }
             catch (MinioException e)
             {
-                response.MessageCode = nameof(StatusCode.Error);
+                response.MessageCode = nameof(StatusCode.ExceptionOccur);
                 response.Message = e.Message;
             }
 
@@ -123,19 +123,19 @@ namespace MinIONet.Service.Services
             }
             catch (ObjectNotFoundException ex)
             {
-                response.MessageCode = nameof(StatusCode.Error);
+                response.MessageCode = nameof(StatusCode.NotFound);
                 response.Message = "File Not Found !";
                 response.Result = new byte[0];
             }
             catch (BucketNotFoundException ex)
             {
-                response.MessageCode = nameof(StatusCode.Error);
+                response.MessageCode = nameof(StatusCode.NotFound);
                 response.Message = "Bucket Not Found !";
                 response.Result = new byte[0];
             }
             catch (MinioException e)
             {
-                response.MessageCode = nameof(StatusCode.Error);
+                response.MessageCode = nameof(StatusCode.ExceptionOccur);
                 response.Message = e.Message;
                 response.Result = new byte[0];
             }
@@ -164,12 +164,12 @@ namespace MinIONet.Service.Services
             }
             catch (BucketNotFoundException ex)
             {
-                response.MessageCode = nameof(StatusCode.Error);
+                response.MessageCode = nameof(StatusCode.NotFound);
                 response.Message = "Bucket Not Found !";
             }
             catch (MinioException e)
             {
-                response.MessageCode = nameof(StatusCode.Error);
+                response.MessageCode = nameof(StatusCode.ExceptionOccur);
                 response.Message = e.Message;
             }
 
@@ -215,7 +215,7 @@ namespace MinIONet.Service.Services
             }
             catch (MinioException e)
             {
-                response.MessageCode = nameof(StatusCode.Error);
+                response.MessageCode = nameof(StatusCode.ExceptionOccur);
                 response.Message = e.Message;
             }
 
@@ -285,13 +285,13 @@ namespace MinIONet.Service.Services
             }
             catch (BucketNotFoundException ex)
             {
-                response.MessageCode = nameof(StatusCode.Error);
+                response.MessageCode = nameof(StatusCode.NotFound);
                 response.Message = "Bucket Not Found !";
                 response.Result = new byte[0];
             }
             catch (MinioException e)
             {
-                response.MessageCode = nameof(StatusCode.Error);
+                response.MessageCode = nameof(StatusCode.ExceptionOccur);
                 response.Message = e.Message;
                 response.Result = new byte[0];
             }
@@ -302,9 +302,10 @@ namespace MinIONet.Service.Services
         {
             if (uploadReqArgs.IsRestructFilePath)
             {
-                var fileNameLst = uploadReqArgs.FileName.Split('.');
-                string repSpaceUndersocre = fileNameLst.First().Replace(" ", "_");
-                uploadReqArgs.FileName = $"{Regex.Replace(repSpaceUndersocre, @"[^a-zA-Z0-9_]", "")}.{fileNameLst.Last()}";
+                var fileExtension = Path.GetExtension(uploadReqArgs.FileName);
+                var fileName = Path.GetFileNameWithoutExtension(uploadReqArgs.FileName);
+                string repSpaceUndersocre = fileName.Replace(" ", "_");
+                uploadReqArgs.FileName = $"{Regex.Replace(repSpaceUndersocre, @"[^a-zA-Z0-9_]", "")}{fileExtension}";
             }
         }
         private async Task<MinIONetServiceResponse<string>> CheckClientSpecification(UploadRequestArgs uploadReqArgs)
@@ -326,7 +327,8 @@ namespace MinIONet.Service.Services
             //check allow overwirte
             if (!uploadReqArgs.IsOverwriteFile)
             {
-                response = await validatorService.CheckFileExist(minioClient, serviceRequest.BucketName, uploadReqArgs.FileName);  
+                string fileName = (!String.IsNullOrEmpty(uploadReqArgs.ToFilePath)) ? $"{uploadReqArgs.ToFilePath}/{uploadReqArgs.FileName}" : uploadReqArgs.FileName;
+                response = await validatorService.CheckFileExist(minioClient, serviceRequest.BucketName, fileName);  
                 goto Result;
             }
 

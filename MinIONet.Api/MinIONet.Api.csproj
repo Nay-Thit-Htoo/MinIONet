@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MinIONet.Domain\MinIONet.Domain.csproj" />
     <ProjectReference Include="..\MinIONet.Service\MinIONet.Service.csproj" />
   </ItemGroup>
 

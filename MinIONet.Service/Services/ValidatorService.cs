@@ -135,7 +135,7 @@ namespace MinIONet.Service.Services
             catch (MinioException e)
             {
                 response.Message = $"MinIO connection failed : {e.Message}";
-                response.MessageCode = nameof(StatusCode.ConnectionFail);
+                response.MessageCode = nameof(StatusCode.ExceptionOccur);
             }
 
             return response;
@@ -171,13 +171,13 @@ namespace MinIONet.Service.Services
                     .WithObject(fileName);
                 var objectStat = await minioClient.StatObjectAsync(args);
                 response.MessageCode = nameof(StatusCode.FileAlreadyExist);
-                response.Message = "File Name Already Exist !";
+                response.Message = $"{fileName} Already Exist !";
             }
             catch (Minio.Exceptions.ObjectNotFoundException)
             { goto Result; }
             catch (MinioException e)
             {
-                response.MessageCode = nameof(StatusCode.Error);
+                response.MessageCode = nameof(StatusCode.ExceptionOccur);
                 response.Message = e.Message;
             }
 

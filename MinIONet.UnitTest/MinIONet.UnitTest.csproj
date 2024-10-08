@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MinIONet.Domain\MinIONet.Domain.csproj" />
     <ProjectReference Include="..\MinIONet.Service\MinIONet.Service.csproj" />
   </ItemGroup>
 
