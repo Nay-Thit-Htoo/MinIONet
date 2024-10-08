@@ -2,9 +2,9 @@
 using Minio.DataModel;
 using Minio.DataModel.Args;
 using Minio.Exceptions;
-using MinIONet.Domain.Enums;
-using MinIONet.Domain.IServices;
-using MinIONet.Domain.Models;
+using MinIONet.Service.Enums;
+using MinIONet.Service.IServices;
+using MinIONet.Service.Models;
 using System.IO.Compression;
 using System.Text.RegularExpressions;
 

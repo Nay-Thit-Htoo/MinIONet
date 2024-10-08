@@ -1,6 +1,7 @@
-﻿using MinIONet.Domain.Enums;
+﻿
+using MinIONet.Service.Enums;
 
-namespace MinIONet.Domain.Models
+namespace MinIONet.Service.Models
 {
     public class MinIONetServiceResponse<T>
     {

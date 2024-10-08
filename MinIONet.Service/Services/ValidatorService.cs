@@ -1,9 +1,9 @@
-﻿using Minio.Exceptions;
-using Minio;
-using MinIONet.Domain.Enums;
-using MinIONet.Domain.IServices;
-using MinIONet.Domain.Models;
+﻿using Minio;
 using Minio.DataModel.Args;
+using Minio.Exceptions;
+using MinIONet.Service.Enums;
+using MinIONet.Service.IServices;
+using MinIONet.Service.Models;
 
 namespace MinIONet.Service.Services
 {

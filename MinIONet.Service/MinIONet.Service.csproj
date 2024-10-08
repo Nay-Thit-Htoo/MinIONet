@@ -8,15 +8,17 @@
 	<IncludeReferencedProjectsInPack>true</IncludeReferencedProjectsInPack>
 	<Title>MinIO + .Net</Title>
 	<PackageId>MinIO.NET</PackageId>
-	<Version>1.0.2</Version>
+	<PackageIcon>Assets/MinNet.png</PackageIcon>
+	<Version>1.1.1</Version>
 	<Authors>Nay Thit Htoo</Authors>	
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<RepositoryUrl>https://github.com/Nay-Thit-Htoo/MinIONet</RepositoryUrl>
+	<RepositoryUrl>https://github.com/Nay-Thit-Htoo/MinIONet</RepositoryUrl>	  
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Minio" Version="6.0.3" />
+	<None Include="Assets/MinNet.png" Pack="true" PackagePath="Assets/" />
   </ItemGroup>
 
 </Project>

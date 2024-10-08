@@ -1,7 +1,7 @@
 ﻿using Minio;
-using MinIONet.Domain.Models;
+using MinIONet.Service.Models;
 
-namespace MinIONet.Domain.IServices
+namespace MinIONet.Service.IServices
 {
     public interface IValidatorService
     {

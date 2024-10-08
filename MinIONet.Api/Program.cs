@@ -1,6 +1,5 @@
-using Minio;
-using MinIONet.Domain.Models;
-using MinIONet.Service;
+using MinIONet.Service.IServices;
+using MinIONet.Service.Models;
 using MinIONet.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
