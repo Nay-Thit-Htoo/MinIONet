@@ -5,11 +5,9 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinIONet.Service", "MinIONet.Service\MinIONet.Service.csproj", "{66273C2C-4EC1-435F-B2D5-93BE74706FA8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinIONet.Domain", "MinIONet.Domain\MinIONet.Domain.csproj", "{242194F0-04CA-4DE3-95C5-2E1F4D09EB26}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinIONet.UnitTest", "MinIONet.UnitTest\MinIONet.UnitTest.csproj", "{554617F0-6DAC-413C-B629-942D7B433311}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinIONet.Api", "MinIONet.Api\MinIONet.Api.csproj", "{681FEF09-EA35-429C-9774-22E043CD1B4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinIONet.Api", "MinIONet.Api\MinIONet.Api.csproj", "{681FEF09-EA35-429C-9774-22E043CD1B4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		{66273C2C-4EC1-435F-B2D5-93BE74706FA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66273C2C-4EC1-435F-B2D5-93BE74706FA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66273C2C-4EC1-435F-B2D5-93BE74706FA8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{242194F0-04CA-4DE3-95C5-2E1F4D09EB26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{242194F0-04CA-4DE3-95C5-2E1F4D09EB26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{242194F0-04CA-4DE3-95C5-2E1F4D09EB26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{242194F0-04CA-4DE3-95C5-2E1F4D09EB26}.Release|Any CPU.Build.0 = Release|Any CPU
 		{554617F0-6DAC-413C-B629-942D7B433311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{554617F0-6DAC-413C-B629-942D7B433311}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{554617F0-6DAC-413C-B629-942D7B433311}.Release|Any CPU.ActiveCfg = Release|Any CPU

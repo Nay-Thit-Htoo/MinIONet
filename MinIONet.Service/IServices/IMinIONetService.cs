@@ -1,7 +1,7 @@
 ﻿using Minio.DataModel;
-using MinIONet.Domain.Models;
+using MinIONet.Service.Models;
 
-namespace MinIONet.Service
+namespace MinIONet.Service.IServices
 {
     public interface IMinIONetService
     {

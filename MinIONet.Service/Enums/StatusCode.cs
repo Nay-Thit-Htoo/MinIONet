@@ -1,4 +1,4 @@
-﻿namespace MinIONet.Domain.Enums
+﻿namespace MinIONet.Service.Enums
 {
     public enum StatusCode
     {

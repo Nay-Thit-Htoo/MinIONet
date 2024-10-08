@@ -1,6 +1,6 @@
 using Minio;
-using MinIONet.Domain.Enums;
-using MinIONet.Domain.Models;
+using MinIONet.Service.Enums;
+using MinIONet.Service.Models;
 using MinIONet.Service.Services;
 using Moq;
 

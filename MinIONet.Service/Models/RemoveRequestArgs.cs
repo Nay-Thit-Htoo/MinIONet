@@ -1,4 +1,4 @@
-﻿namespace MinIONet.Domain.Models
+﻿namespace MinIONet.Service.Models
 {
     public class RemoveRequestArgs 
     {

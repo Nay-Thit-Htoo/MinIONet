@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using MinIONet.Domain.Enums;
-using MinIONet.Domain.Models;
-using MinIONet.Service;
+﻿using Microsoft.AspNetCore.Mvc;
+using MinIONet.Service.IServices;
+using MinIONet.Service.Models;
 
 namespace MinIONet.Api.Controllers
 {
@@ -36,7 +34,7 @@ namespace MinIONet.Api.Controllers
         {
             var request = new DownloadRequestArgs() { FileName = FileName};            
             var result = await minIONetService.DownloadFile(request);
-            if(!result.MessageCode.Equals(nameof(Domain.Enums.StatusCode.Success))) 
+            if(!result.MessageCode.Equals(nameof(Service.Enums.StatusCode.Success))) 
                  return Ok(result);
             return File(result.Result!, "application/octet-stream", FileName);
         }
