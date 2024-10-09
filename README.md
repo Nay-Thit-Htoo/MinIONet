@@ -116,6 +116,7 @@ downloadResult.Result
 ### Get Bucket Files
 
 ```csharp
+MinIONetService minIONetService = new MinIONetService(minIONetServiceRequest);
 var fileResult = await minIONetService.GetFiles("searchFileName"); //file name that you want to search 
 foreach(var file in fileResult.Result)
   Console.WriteLine($"File Name : {file.Key}\n File Type: {file.ContentType}\n File Size: {file.Size}");
