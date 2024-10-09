@@ -113,6 +113,31 @@ downloadResult.Message
 downloadResult.Result
 ```
 
+### Remove File
+
+```csharp
+MinIONetService minIONetService = new MinIONetService(minIONetServiceRequest);
+RemoveRequestArgs removeRequestArgs = new RemoveRequestArgs()
+{
+    // for no nested folder path
+    //FileName = "your-file-name"
+
+    //for nested folder path
+    FileName = "/bucketname/parent-file-name/your-file-name"
+};
+var removeResult=await minIONetService.RemoveFile(removeRequestArgs);
+
+//Message Code
+removeResult.MessageCode
+
+//Message
+removeResult.Message
+
+//Result
+removeResult.Result
+```
+
+
 ### Get Bucket Files
 
 ```csharp
